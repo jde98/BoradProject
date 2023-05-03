@@ -25,3 +25,9 @@
 
 백엔드 : 정다은
 - Java DB WebServer React Javascript
+
+프론트 : 김영우 
+- React Javascript stylecomponent
+
+프론트 : 최종원 
+- React Javascript stylecomponent
