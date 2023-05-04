@@ -2,16 +2,18 @@ package com.de.board.post.service;
 
 import java.util.List;
 
+import com.de.board.post.dto.AddPostDTO;
 import com.de.board.post.dto.PostDTO;
 
 public interface PostService {
+	
 	List<PostDTO> getPostList(PostDTO postDTO);
 	
-	PostDTO getPost(PostDTO postDTO);
+	PostDTO getPost(int postId);
 	
-	int insertPost(PostDTO postDTO);
+	int insertPost(AddPostDTO addPostDTO);
 	
 	int updatePost(PostDTO postDTO);
 	
-	int deletePost(PostDTO postDTO);
+	int deletePost(List<String> postIds);
 }

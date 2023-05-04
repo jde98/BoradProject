@@ -1,6 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.de.board.post.mapper.PostMapper">
+	<mapper namespace="com.de.board.post.mapper.PostMapper">
+
+		<select id="getPostList" parameterType="com.de.board.post.dto.PostDTO" resultType="com.de.board.post.dto.PostDTO">
+			SELECT 
+				POST_ID,
+				TITLE,
+				CONTENT,
+				CREATE_USER,
+				UPDATE_USER,
+				USE_YN
+			FROM	POST
+			<where>
+				<if test="title != null and title != ''">
+					AND		TITLE LIKE '%'||#{title}||'%'
+				</if>
+				
+				<if test="createUser != null and createUser != ''">
+					AND		CREATE_USER LIKE '%'||#{createUser}||'%'
+				</if>
+					AND		USE_YN = 'Y'
+			</where>
+		</select>
 		
-</mapper>
+		<select id="getPost" parameterType="int" resultType="com.de.board.post.dto.PostDTO">
+			SELECT
+				POST_ID,
+				TITLE,
+				CONTENT,
+				CREATE_USER,
+				UPDATE_USER,
+				USE_YN
+			FROM	POST
+			WHERE	POST_ID = #{postId}
+			AND		USE_YN = 'Y'
+		</select>
+		
+		<insert id="insertPost" parameterType="com.de.board.post.dto.AddPostDTO">
+			INSERT
+			INTO	POST
+			(
+				POST_ID,
+				TITLE,
+				CONTENT,
+				CREATE_USER,
+				UPDATE_USER,
+				USE_YN
+			)
+			VALUES
+			(
+				(
+					SELECT	NVL(MAX(POST_ID), 0)+1
+					FROM	POST
+				),
+				#{title},
+				#{content},
+				#{createUser},
+				#{createUser},
+				'Y'
+			)
+		</insert>
+		
+		<update id="updatePost" parameterType="com.de.board.post.dto.PostDTO">
+			UPDATE	POST
+			SET		TITLE = #{title},
+					CONTENT = #{content},
+					UPDATE_USER = #{upateUser}
+			WHERE	POST_ID = #{postId}
+			AND		USE_YN = 'Y'
+		</update>
+		
+		<update id="deletePost" parameterType="String">
+			UPDATE	POST
+			SET		USE_YN = 'N'
+			WHERE	POST_ID IN
+			<foreach collection="list" item="postId" separator="," open="(" close=")">
+				#{postId}
+			</foreach>
+		</update>
+		
+	</mapper>

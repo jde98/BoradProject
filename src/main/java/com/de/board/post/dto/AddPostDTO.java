@@ -1,21 +1,11 @@
 package com.de.board.post.dto;
 
+public class AddPostDTO {
 
-public class PostDTO {
-	
-	private int postId;
 	private String title;
 	private String content;
 	private String createUser;
-	private String updateUser;
-	private String useYn;
 	
-	public int getPostId() {
-		return postId;
-	}
-	public void setPostId(int postId) {
-		this.postId = postId;
-	}
 	public String getTitle() {
 		return title;
 	}
@@ -34,20 +24,5 @@ public class PostDTO {
 	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
 	}
-	public String getUpdateUser() {
-		return updateUser;
-	}
-	public void setUpdateUser(String updateUser) {
-		this.updateUser = updateUser;
-	}
-	public String getUseYn() {
-		return useYn;
-	}
-	public void setUseYn(String useYn) {
-		this.useYn = useYn;
-	}
-	
-	
-	
-	
+
 }
