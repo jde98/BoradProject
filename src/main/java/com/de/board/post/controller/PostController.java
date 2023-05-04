@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.de.board.common.ResponseDTO;
 import com.de.board.post.dto.AddPostDTO;
 import com.de.board.post.dto.PostDTO;
+import com.de.board.post.dto.UpdatePostDTO;
 import com.de.board.post.service.PostService;
 
 @RestController
@@ -63,18 +64,18 @@ public class PostController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<ResponseDTO> updatePost(@RequestBody PostDTO postDTO) {
+	public ResponseEntity<ResponseDTO> updatePost(@RequestBody UpdatePostDTO updatePostDTO) {
 		
 		return ResponseEntity.ok(
-				ResponseDTO.of(HttpStatus.OK, "updatePost Success", postService.updatePost(postDTO))
+				ResponseDTO.of(HttpStatus.OK, "updatePost Success", postService.updatePost(updatePostDTO))
 		);
 	}
 	
-	@DeleteMapping
-	public ResponseEntity<ResponseDTO> deletePost(@RequestBody List<String> postIds) {
+	@DeleteMapping("/{postId}")
+	public ResponseEntity<ResponseDTO> deletePost(@PathVariable int postId) {
 		
 		return ResponseEntity.ok(
-				ResponseDTO.of(HttpStatus.OK, "deletePost Success", postService.deletePost(postIds))
+				ResponseDTO.of(HttpStatus.OK, "deletePost Success", postService.deletePost(postId))
 		);
 	}
 	

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.de.board.post.dto.AddPostDTO;
 import com.de.board.post.dto.PostDTO;
+import com.de.board.post.dto.UpdatePostDTO;
 
 @Mapper
 public interface PostMapper {
@@ -16,7 +17,7 @@ public interface PostMapper {
 	
 	int insertPost(AddPostDTO addPostDTO);
 	
-	int updatePost(PostDTO postDTO);
+	int updatePost(UpdatePostDTO updatePostDTO);
 	
-	int deletePost(List<String> postIds);
+	int deletePost(int postId);
 }

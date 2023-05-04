@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.de.board.post.dto.AddPostDTO;
 import com.de.board.post.dto.PostDTO;
+import com.de.board.post.dto.UpdatePostDTO;
 import com.de.board.post.mapper.PostMapper;
 
 @Service
@@ -34,15 +35,15 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public int updatePost(PostDTO postDTO) {
+	public int updatePost(UpdatePostDTO updatePostDTO) {
 
-		return postMapper.updatePost(postDTO);
+		return postMapper.updatePost(updatePostDTO);
 	}
 
 	@Override
-	public int deletePost(List<String> postIds) {
+	public int deletePost(int postId) {
 
-		return postMapper.deletePost(postIds);
+		return postMapper.deletePost(postId);
 	}
 	
 }

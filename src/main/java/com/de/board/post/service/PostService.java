@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.de.board.post.dto.AddPostDTO;
 import com.de.board.post.dto.PostDTO;
+import com.de.board.post.dto.UpdatePostDTO;
 
 public interface PostService {
 	
@@ -13,7 +14,7 @@ public interface PostService {
 	
 	int insertPost(AddPostDTO addPostDTO);
 	
-	int updatePost(PostDTO postDTO);
+	int updatePost(UpdatePostDTO updatePostDTO);
 	
-	int deletePost(List<String> postIds);
+	int deletePost(int postId);
 }

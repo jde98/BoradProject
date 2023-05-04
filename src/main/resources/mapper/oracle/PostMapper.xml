@@ -62,7 +62,7 @@
 			)
 		</insert>
 		
-		<update id="updatePost" parameterType="com.de.board.post.dto.PostDTO">
+		<update id="updatePost" parameterType="com.de.board.post.dto.UpdatePostDTO">
 			UPDATE	POST
 			SET		TITLE = #{title},
 					CONTENT = #{content},
@@ -71,13 +71,10 @@
 			AND		USE_YN = 'Y'
 		</update>
 		
-		<update id="deletePost" parameterType="String">
+		<delete id="deletePost" parameterType="int">
 			UPDATE	POST
 			SET		USE_YN = 'N'
-			WHERE	POST_ID IN
-			<foreach collection="list" item="postId" separator="," open="(" close=")">
-				#{postId}
-			</foreach>
-		</update>
+			WHERE	POST_ID = #{postId}
+		</delete>
 		
 	</mapper>
