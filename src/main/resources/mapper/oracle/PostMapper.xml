@@ -9,7 +9,9 @@
 				TITLE,
 				CONTENT,
 				CREATE_USER,
+				CREATE_DATE,
 				UPDATE_USER,
+				UPDATE_DATE,
 				USE_YN
 			FROM	POST
 			<where>
@@ -22,6 +24,7 @@
 				</if>
 					AND		USE_YN = 'Y'
 			</where>
+			ORDER BY	POST_ID
 		</select>
 		
 		<select id="getPost" parameterType="int" resultType="com.de.board.post.dto.PostDTO">
@@ -30,11 +33,14 @@
 				TITLE,
 				CONTENT,
 				CREATE_USER,
+				CREATE_DATE,
 				UPDATE_USER,
+				UPDATE_DATE,
 				USE_YN
 			FROM	POST
 			WHERE	POST_ID = #{postId}
 			AND		USE_YN = 'Y'
+			ORDER BY	POST_ID
 		</select>
 		
 		<insert id="insertPost" parameterType="com.de.board.post.dto.AddPostDTO">
@@ -45,7 +51,9 @@
 				TITLE,
 				CONTENT,
 				CREATE_USER,
+				CREATE_DATE,
 				UPDATE_USER,
+				UPDATE_DATE,
 				USE_YN
 			)
 			VALUES
@@ -57,7 +65,9 @@
 				#{title},
 				#{content},
 				#{createUser},
+				SYSDATE,
 				#{createUser},
+				SYSDATE,
 				'Y'
 			)
 		</insert>
@@ -66,15 +76,20 @@
 			UPDATE	POST
 			SET		TITLE = #{title},
 					CONTENT = #{content},
-					UPDATE_USER = #{upateUser}
+					UPDATE_USER = #{updateUser},
+					UPDATE_DATE = SYSDATE
 			WHERE	POST_ID = #{postId}
 			AND		USE_YN = 'Y'
 		</update>
 		
 		<delete id="deletePost" parameterType="int">
 			UPDATE	POST
-			SET		USE_YN = 'N'
-			WHERE	POST_ID = #{postId}
+			SET		UPDATE_DATE = SYSDATE,
+					USE_YN = 'N'
+			WHERE	POST_ID IN 
+			<foreach collection="list" item="postId" open="(" close=")" separator=",">
+				#{postId}
+			</foreach>
 		</delete>
 		
 	</mapper>

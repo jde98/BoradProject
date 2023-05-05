@@ -7,7 +7,9 @@ public class PostDTO {
 	private String title;
 	private String content;
 	private String createUser;
+	private String createDate;
 	private String updateUser;
+	private String updateDate;
 	private String useYn;
 	
 	public int getPostId() {
@@ -46,8 +48,18 @@ public class PostDTO {
 	public void setUseYn(String useYn) {
 		this.useYn = useYn;
 	}
-	
-	
+	public String getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+	public String getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
+	}
 	
 	
 }

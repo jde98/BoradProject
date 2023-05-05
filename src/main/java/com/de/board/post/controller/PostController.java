@@ -21,6 +21,12 @@ import com.de.board.post.dto.PostDTO;
 import com.de.board.post.dto.UpdatePostDTO;
 import com.de.board.post.service.PostService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Tag(name = "Code", description = "코드 api")
 @RestController
 @RequestMapping("/post")
 public class PostController {
@@ -29,6 +35,7 @@ public class PostController {
 	@Autowired
 	private PostService postService;
 	
+	@Operation(summary = "포스트 리스트 조회")
 	@GetMapping
 	public ResponseEntity<ResponseDTO> getPostList(
 			@RequestParam("title") String title,
@@ -36,13 +43,14 @@ public class PostController {
 			) {
 		PostDTO postDTO = new PostDTO();
 		postDTO.setTitle(title);
-		postDTO.setCreateUser(createUser);		
+		postDTO.setCreateUser(createUser);
 		
 		return ResponseEntity.ok(
 				ResponseDTO.of(HttpStatus.OK, "getPostList Success", postService.getPostList(postDTO))
 		);
 	}
 	
+	@Operation(summary = "포스트 조회")
 	@GetMapping("/{postId}")
 	public ResponseEntity<ResponseDTO> getPost(
 			@PathVariable("postId") int postId
@@ -55,6 +63,7 @@ public class PostController {
 		);
 	}
 	
+	@Operation(summary = "포스트 추가")
 	@PostMapping
 	public ResponseEntity<ResponseDTO> insertPost(@RequestBody AddPostDTO addPostDTO) {
 		
@@ -63,6 +72,7 @@ public class PostController {
 		);
 	}
 	
+	@Operation(summary = "포스트 수정")
 	@PutMapping
 	public ResponseEntity<ResponseDTO> updatePost(@RequestBody UpdatePostDTO updatePostDTO) {
 		
@@ -71,11 +81,12 @@ public class PostController {
 		);
 	}
 	
-	@DeleteMapping("/{postId}")
-	public ResponseEntity<ResponseDTO> deletePost(@PathVariable int postId) {
+	@Operation(summary = "포스트 삭제")
+	@DeleteMapping
+	public ResponseEntity<ResponseDTO> deletePost(@RequestBody List<Integer> postIds) {
 		
 		return ResponseEntity.ok(
-				ResponseDTO.of(HttpStatus.OK, "deletePost Success", postService.deletePost(postId))
+				ResponseDTO.of(HttpStatus.OK, "deletePost Success", postService.deletePost(postIds))
 		);
 	}
 	

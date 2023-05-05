@@ -4,8 +4,6 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 
-import com.de.board.post.dto.PostDTO;
-
 public class ResponseDTO {
 	
 	private int status;

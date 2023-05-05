@@ -5,7 +5,7 @@ public class UpdatePostDTO {
 	private int postId;
 	private String title;
 	private String content;
-	private String createUser;
+	private String updateUser;
 	
 	public int getPostId() {
 		return postId;
@@ -25,10 +25,10 @@ public class UpdatePostDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getCreateUser() {
-		return createUser;
+	public String getUpdateUser() {
+		return updateUser;
 	}
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
 	}
 }
